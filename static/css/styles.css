@@ -1,0 +1,231 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    background-color: #0a192f;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0a192f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #0a192f, #112240, #1d3461);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    z-index: 1;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 70%;
+    }
+
+    75% {
+        background-position: 100% 70%;
+    }
+
+    100% {
+        background-position: 0% 70%;
+    }
+}
+
+.floating-bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+.bubble {
+    position: absolute;
+    background-color: rgba(103, 138, 110, 0.1);
+    border-radius: 50%;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(var(--translate-x), var(--translate-y));
+    }
+
+    50% {
+        transform: translate(calc(var(--translate-x) * -1), var(--translate-y));
+    }
+
+    75% {
+        transform: translate(var(--translate-x), calc(var(--translate-y) * -1));
+    }
+}
+
+.hero img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    z-index: 3;
+    animation: fadeInUp 1s ease-out;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.overlay {
+    text-align: center;
+    z-index: 4;
+    width: 90%;
+    max-width: 800px;
+}
+
+.overlay h1 {
+    font-size: 2.5em;
+    margin: 0 0 1rem;
+    animation: fadeInUp 1s ease-out;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tagline {
+    font-size: 1.2em;
+    margin-top: 0.5rem;
+    color: #02a57f;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.skills {
+    margin-top: 1rem;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.skills span {
+    display: inline-block;
+    background-color: rgba(100, 255, 218, 0.1);
+    color: #02a57f;
+    padding: 0.3rem 0.6rem;
+    margin: 0.3rem;
+    border-radius: 20px;
+    font-size: 0.9em;
+}
+
+.description {
+    margin-top: 1rem;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.learning-section {
+    margin-top: 2rem;
+    animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+.learning-section h3 {
+    font-size: 1.3em;
+    color: #02a57f;
+    margin-bottom: 0.6rem;
+}
+
+.learning-items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.learning-items span {
+    background-color: rgba(100, 255, 218, 0.1);
+    color: #02a57f;
+    padding: 0.5rem 0.8rem;
+    margin: 0.3rem;
+    border-radius: 20px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.note-section {
+    margin-top: 2rem;
+    font-style: normal;
+    animation: slideInFromBottom 1s ease-out 1s both;
+}
+
+.note-section p {
+    font-size: 1em;
+    line-height: 1.4;
+    color: #ccd6f6;
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .overlay h1 {
+        font-size: 2em;
+    }
+
+    .tagline {
+        font-size: 1em;
+    }
+
+    .skills span,
+    .learning-items span {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .overlay h1 {
+        font-size: 1.8em;
+    }
+
+    .description,
+    .funny-section p {
+        font-size: 0.9em;
+    }
+}
