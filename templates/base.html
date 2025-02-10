@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keerthi Gowda - Full Stack Engineer</title>
+    <link rel="icon" type="image/x-icon" href="/static/icons/favicon-96x96.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/static/icons/apple-icon-precomposed.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Add background elements here so they're present on all pages -->
+    <div class="background-animation"></div>
+    <div class="floating-bubbles"></div>
+    
+    <nav class="navbar">
+        <div class="nav-logo">KG</div>
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active"{% endif %}>Home</a>
+            <a href="{{ url_for('farm') }}" {% if request.endpoint == 'farm' %}class="active"{% endif %}>Farm</a>
+            <a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>About</a>
+            <a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a>
+        </div>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <!-- Move bubble creation script to base template -->
+    <script>
+        function createBubbles() {
+            const bubblesContainer = document.querySelector('.floating-bubbles');
+            const bubbleCount = 125;
+
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+
+                const size = Math.random() * 50 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.top = `${Math.random() * 100}%`;
+
+                const translateX = Math.random() * 350 - 50;
+                const translateY = Math.random() * 350 - 50;
+                bubble.style.setProperty('--translate-x', `${translateX}px`);
+                bubble.style.setProperty('--translate-y', `${translateY}px`);
+
+                const animationDuration = Math.random() * 20 + 10;
+                bubble.style.animation = `float ${animationDuration}s infinite`;
+
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+
+        window.addEventListener('load', createBubbles);
+
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html> 

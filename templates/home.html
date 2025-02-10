@@ -1,80 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keerthi Gowda - Full Stack Engineer</title>
-  <link rel="icon" type="image/x-icon" href="/static/icons/favicon-96x96.png">
-  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/static/icons/apple-icon-precomposed.png">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-
-<body>
-  <div class="hero">
-    <div class="background-animation"></div>
-    <div class="floating-bubbles"></div>
+{% block content %}
+<section class="hero">
     <img src="{{ url_for('static', filename='images/keerthi-gowda.jpeg') }}" alt="Keerthi Gowda">
     <div class="overlay">
-      <h1>Hi, I'm Keerthi Gowda</h1>
-      <p class="tagline">Full Stack Engineer. Farmer by Weekend.</p>
-      <div class="skills">
-        <span>Python</span>
-        <span>Flutter</span>
-        <span>Flask</span>
-        <span>Django</span>
-        <span>Postgres</span>
-        <span>MongoDB</span>
-        <span>Tensorflow</span>
-      </div>
-      <p class="description">
-        Passionate about creating seamless web experiences from front-end to back-end.
-        With expertise in modern dev technologies, I bring ideas to life through clean,
-        efficient, and scalable code.
-      </p>
-      <div class="learning-section">
-        <h3>Currently Learning</h3>
-        <div class="learning-items">
-          <span>Angular</span>
-          <span>Go</span>
-          <span>Rust (Rust embed)</span>
-        </div>
-      </div>
-      <div class="note-section">
-        <p>DSA interviews are not my cup of tea.</p>
-      </div>
+        <h1>Hi, I'm Keerthi Gowda</h1>
+        <p class="tagline">Full Stack Engineer | Farmer by Weekend</p>
     </div>
-  </div>
-  <script>
-    function createBubbles() {
-      const bubblesContainer = document.querySelector('.floating-bubbles');
-      const bubbleCount = 125;
-
-      for (let i = 0; i < bubbleCount; i++) {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-
-        const size = Math.random() * 50 + 20;
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-
-        bubble.style.left = `${Math.random() * 100}%`;
-        bubble.style.top = `${Math.random() * 100}%`;
-
-        const translateX = Math.random() * 350 - 50;
-        const translateY = Math.random() * 350 - 50;
-        bubble.style.setProperty('--translate-x', `${translateX}px`);
-        bubble.style.setProperty('--translate-y', `${translateY}px`);
-
-        const animationDuration = Math.random() * 20 + 10;
-        bubble.style.animation = `float ${animationDuration}s infinite`;
-
-        bubblesContainer.appendChild(bubble);
-      }
-    }
-
-    window.addEventListener('load', createBubbles);
-  </script>
-</body>
-
-</html>
+</section>
+{% endblock %}

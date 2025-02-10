@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="farm-section">
+    <h2>The Farm</h2>
+    <p class="farm-intro">
+        Located 20 km from Ramanagara and 56 km from Bangalore, my farm is where I spend my weekends 
+        nurturing various crops in harmony with nature.
+    </p>
+    <div class="crop-grid">
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/coconut.webp') }}" alt="Coconut Trees">
+            <h3>Coconut</h3>
+            <p>Cultivating for 8 years, these majestic palms form the backbone of the farm, providing both 
+               shade and sustainable income.</p>
+        </div>
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/arecanut.webp') }}" alt="Arecanut Trees">
+            <h3>Arecanut</h3>
+            <p>A 5-year-old plantation that has adapted well to the local climate, becoming one of our 
+               primary crops.</p>
+        </div>
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/cardamom.webp') }}" alt="Cardamom Plants">
+            <h3>Cardamom</h3>
+            <p>Started 2 years ago, these aromatic plants thrive in the partial shade of coconut trees.</p>
+        </div>
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/pepper.webp') }}" alt="Pepper Vines">
+            <h3>Pepper</h3>
+            <p>Growing alongside arecanut trees, these vines represent our venture into spice cultivation.</p>
+        </div>
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/coffee.webp') }}" alt="Coffee Plants">
+            <h3>Coffee</h3>
+            <p>A recent addition to our farm, these coffee plants are showing promising growth under the 
+               canopy.</p>
+        </div>
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/nutmeg.webp') }}" alt="Nutmeg Trees">
+            <h3>Nutmeg</h3>
+            <p>Part of our diversification strategy, these young trees are developing well in our mixed 
+               farming system.</p>
+        </div>
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/sandal.webp') }}" alt="Sandal Trees">
+            <h3>Sandal</h3>
+            <p>Both red and regular sandal varieties are being grown as a long-term investment in farm 
+               sustainability.</p>
+        </div>
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/jackfruit.webp') }}" alt="Jackfruit Trees">
+            <h3>Jackfruit</h3>
+            <p>These hardy trees provide both fruit and shade, contributing to our farm's biodiversity.</p>
+        </div>
+        <div class="crop-card">
+            <img src="{{ url_for('static', filename='images/butterfruit.webp') }}" alt="Butter Fruit Trees">
+            <h3>Butter Fruit</h3>
+            <p>Also known as avocado, these trees are part of our newer plantations, showing excellent 
+               growth potential.</p>
+        </div>
+    </div>
+</section>
+{% endblock %} 
