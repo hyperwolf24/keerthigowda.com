@@ -4,7 +4,7 @@ html {
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
     color: white;
     overflow-x: hidden;
     background-color: #0a192f;
@@ -116,6 +116,8 @@ html {
     margin-top: 0.5rem;
     color: #02a57f;
     animation: fadeInUp 1s ease-out 0.2s both;
+    letter-spacing: 0.02em;
+    font-weight: 500;
 }
 
 .skills {
@@ -331,9 +333,10 @@ html {
 
 .nav-logo {
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 600;
     color: #02a57f;
     font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.03em;
 }
 
 .nav-links {
@@ -403,6 +406,7 @@ html {
     border: 1px solid #02a57f;
     border-radius: 4px;
     transition: all 0.3s ease;
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 .contact-link:hover {
@@ -701,4 +705,59 @@ html {
     .content-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.personal-interests {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.interest-item {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 6px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.interest-item:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.interest-item i {
+    margin-right: 6px;
+    font-size: 0.9rem;
+}
+
+/* Small enhancement for about page cards */
+.about-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #0a192f;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-card h3 {
+    color: #64ffda;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.about-card p {
+    color: #ccd6f6;
+    line-height: 1.6;
 }
