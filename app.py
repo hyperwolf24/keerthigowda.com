@@ -7,6 +7,10 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
+@app.route('/music')
+def music():
+    return render_template('music.html')
+
 @app.route('/farm')
 def farm():
     return render_template('farm.html')

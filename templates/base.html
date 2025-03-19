@@ -21,6 +21,7 @@
         <div class="nav-logo">KG</div>
         <div class="nav-links">
             <a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active"{% endif %}>Home</a>
+            <a href="{{ url_for('music') }}" {% if request.endpoint == 'music' %}class="active"{% endif %}>Music</a>
             <a href="{{ url_for('farm') }}" {% if request.endpoint == 'farm' %}class="active"{% endif %}>Farm</a>
             <a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>About</a>
             <a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a>

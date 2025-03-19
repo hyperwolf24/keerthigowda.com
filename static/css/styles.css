@@ -259,7 +259,8 @@ html {
 }
 
 .crop-card {
-    background: rgba(17, 34, 64, 0.8);
+    background: rgba(17, 34, 64, 0.6);
+    backdrop-filter: blur(5px);
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s ease;
@@ -743,7 +744,8 @@ html {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    background-color: #0a192f;
+    background: rgba(17, 34, 64, 0.6);  
+    backdrop-filter: blur(5px); 
 }
 
 .about-card:hover {
@@ -760,4 +762,113 @@ html {
 .about-card p {
     color: #ccd6f6;
     line-height: 1.6;
+}
+
+/* Music Page Styles */
+.music-container {
+    position: relative;
+    z-index: 5;
+    padding-top: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.music-image {
+    max-height: 400px; 
+    box-shadow: 0 0 25px rgba(2, 165, 127, 0.3); 
+    border: 2px solid rgba(2, 165, 127, 0.2);
+    display: block;
+}
+
+.music-title {
+    color: #02a57f; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    position: relative; 
+    z-index: 10;
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.music-card {
+    padding: 2rem; 
+    border-radius: 12px;
+    background: rgba(17, 34, 64, 0.6);  
+    backdrop-filter: blur(5px); 
+    position: relative; 
+    z-index: 10; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    border: 1px solid rgba(2, 165, 127, 0.2);
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.music-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(2, 165, 127, 0.2);
+}
+
+.music-card h3 {
+    color: #02a57f; 
+    margin-bottom: 1rem;
+}
+
+.music-card p {
+    color: #ccd6f6; 
+    line-height: 1.6;
+}
+
+/* Music page media queries */
+@media (max-width: 768px) {
+    .music-container {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    
+    .music-card {
+        margin-bottom: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    .music-image {
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .music-image {
+        max-height: 250px;
+    }
+    
+    .music-title {
+        font-size: 1.8em;
+    }
+}
+
+/* Music page styles update */
+.image-gallery {
+    display: flex;
+    gap: 80px;
+    margin-bottom: 20px;
+}
+
+.image-gallery .music-image {
+    max-width: calc(50% - 7.5px);
+    height: auto;
+    object-fit: cover;
+}
+
+@media (max-width: 576px) {
+    .image-gallery {
+        flex-direction: column;
+    }
+    
+    .image-gallery .music-image {
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
 }
