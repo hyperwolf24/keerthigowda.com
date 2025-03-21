@@ -852,7 +852,7 @@ html {
 /* Music page styles update */
 .image-gallery {
     display: flex;
-    gap: 80px;
+    gap: 25px;
     margin-bottom: 20px;
 }
 
