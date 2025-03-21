@@ -1,12 +1,54 @@
 from flask import Flask, render_template, request
 from datetime import datetime, date
 import json
+import os
 
 app = Flask(__name__)
+
+def log_visitor_ip():
+    ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if ip_address and ',' in ip_address:
+        ip_address = ip_address.split(',')[0].strip()
+    
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    path = request.path
+    
+    log_dir = os.path.join(os.path.dirname(__file__), 'logs')
+    os.makedirs(log_dir, exist_ok=True)
+    
+    with open(os.path.join(log_dir, 'visitor_log.txt'), 'a') as f:
+        f.write(f"{timestamp} | {ip_address} | {path}\n")
+    
+    log_entry = {
+        'timestamp': timestamp,
+        'ip': ip_address,
+        'path': path,
+        'user_agent': request.headers.get('User-Agent', 'Unknown'),
+        'referrer': request.headers.get('Referer', 'Direct')
+    }
+    
+    json_log_path = os.path.join(log_dir, 'visitor_log.json')
+    try:
+        if os.path.exists(json_log_path) and os.path.getsize(json_log_path) > 0:
+            with open(json_log_path, 'r') as f:
+                log_data = json.load(f)
+        else:
+            log_data = []
+        
+        log_data.append(log_entry)
+        
+        with open(json_log_path, 'w') as f:
+            json.dump(log_data, f, indent=2)
+    except Exception as e:
+        print(f"Error writing to JSON log: {e}")
 
 @app.context_processor
 def inject_now():
     return {'now': datetime.now}
+
+@app.before_request
+def before_request():
+    log_visitor_ip()
 
 @app.route('/')
 def home():

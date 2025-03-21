@@ -8,3 +8,5 @@ services:
     environment:
       - FLASK_ENV=production
     restart: always
+    volumes:
+      - ./logs:/app/logs
