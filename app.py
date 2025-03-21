@@ -4,6 +4,10 @@ import json
 
 app = Flask(__name__)
 
+@app.context_processor
+def inject_now():
+    return {'now': datetime.now}
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -45,7 +49,25 @@ def robots():
 User-agent: *
 Allow: /
 Sitemap: {}sitemap.xml
-""".format(request.host_url)
+Sitemap: {}sitemap.json
+""".format(request.host_url, request.host_url)
+
+@app.route('/sitemap.json')
+def sitemap_json():
+    host_url = request.host_url.rstrip('/')
+    today = date.today().strftime('%Y-%m-%d')
+    pages = [
+        {'url': host_url + '/', 'lastmod': today, 'title': 'Keerthi Gowda - Software Engineer'},
+        {'url': host_url + '/music', 'lastmod': today, 'title': 'Keerthi Gowda'},
+        {'url': host_url + '/farm', 'lastmod': today, 'title': 'Keerthi Gowda'},
+        {'url': host_url + '/about', 'lastmod': today, 'title': 'Keerthi Gowda'},
+        {'url': host_url + '/contact', 'lastmod': today, 'title': 'Keerthi Gowda'},
+    ]
+    return app.response_class(
+        response=json.dumps(pages),
+        status=200,
+        mimetype='application/json'
+    )
 
 @app.route('/.well-known/traffic-advice')
 def traffic_advice():

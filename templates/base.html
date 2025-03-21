@@ -38,7 +38,7 @@
     <div class="floating-bubbles"></div>
     
     <nav class="navbar">
-        <div class="nav-logo">KG</div>
+        <a href="{{ url_for('home') }}" class="nav-logo" style="text-decoration: none;">KG</a>
         <div class="nav-links">
             <a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active"{% endif %}>Home</a>
             <a href="{{ url_for('music') }}" {% if request.endpoint == 'music' %}class="active"{% endif %}>Music</a>
@@ -55,6 +55,18 @@
 
     {% block content %}{% endblock %}
 
+    {% block footer %}
+    <footer class="footer py-3 bg-dark text-white" style="position: relative; z-index: 100;">
+        <div class="container" style="display: flex; justify-content: center; width: 100%;">
+            <p class="mb-0" style="text-align: center; width: 100%;">
+                &copy; {{ now().year }} Keerthi Gowda. All rights reserved.
+            </p>
+        </div>
+    </footer>
+    {% endblock %}
+
+    </div>
+    
     <!-- Move bubble creation script to base template -->
     <script>
         function createBubbles() {
