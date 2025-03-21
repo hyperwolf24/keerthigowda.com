@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+{% block title %}Keerthi Gowda - Software Engineer{% endblock %}
+{% block description %}Welcome to the official website of Keerthi Gowda - Software Engineer, Farmer, and more. Explore music, farming and learn about Keerthi's work.{% endblock %}
+{% block keywords %}Keerthi Gowda, Software Engineer, Farmer, official website, music, farming{% endblock %}
+{% block canonical_path %}{% endblock %}
+
+{% block og_title %}Keerthi Gowda - Software Engineer{% endblock %}
+{% block og_description %}Welcome to the official website of Keerthi Gowda - Software Engineer, Farmer, and more.{% endblock %}
+
 {% block content %}
 <section class="hero">
     <img src="{{ url_for('static', filename='images/keerthi-gowda3.jpeg') }}" alt="Keerthi Gowda">
@@ -10,4 +18,20 @@
         </p>
     </div>
 </section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Keerthi Gowda",
+  "url": "https://keerthigowda.com",
+  "sameAs": [
+    "https://www.instagram.com/keerthi.__.__",
+    "https://www.youtube.com/@hyperwolf24",
+    "https://x.com/hyperwolf_24"
+  ],
+  "jobTitle": "Software Engineer and Farmer",
+  "description": "Keerthi Gowda is a Software Engineer and Farmer based in Bengaluru, India."
+}
+</script>
 {% endblock %}

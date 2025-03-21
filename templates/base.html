@@ -3,7 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keerthi Gowda - Full Stack Engineer</title>
+    <title>{% block title %}Keerthi Gowda{% endblock %}</title>
+    <meta name="description" content="{% block description %}Official website of Keerthi Gowda - Software Engineer, farmer, and more.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}Keerthi Gowda, music, farming{% endblock %}">
+    <meta name="author" content="Keerthi Gowda">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}Keerthi Gowda{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Official website of Keerthi Gowda{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:image" content="{% block og_image %}/static/images/keerthi-profile.jpg{% endblock %}">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Keerthi Gowda{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Official website of Keerthi Gowda{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}/static/images/keerthi-profile.jpg{% endblock %}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ request.url_root }}{% block canonical_path %}{% endblock %}">
     <link rel="icon" type="image/x-icon" href="/static/icons/favicon-96x96.png">
     <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/static/icons/apple-icon-precomposed.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,6 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="google-site-verification" content="MPqjuuwDV6FcA6-ESZFgeZNTVnMOrin1IM6YyJpZW1w" />
 </head>
 <body>
     <!-- Add background elements here so they're present on all pages -->
