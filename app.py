@@ -2,24 +2,65 @@ from flask import Flask, render_template, request
 from datetime import datetime, date
 import json
 import os
+import requests
+import threading
+import time
+from functools import lru_cache
 
 app = Flask(__name__)
+
+@lru_cache(maxsize=1024, typed=False)
+def get_geo_location(ip_address):
+    try:
+        time.sleep(0.1)
+        
+        response = requests.get(f"https://ipapi.co/{ip_address}/json/", timeout=2)
+        if response.status_code == 200:
+            data = response.json()
+            city = data.get('city', 'Unknown')
+            country = data.get('country_name', 'Unknown')
+            return f"{city}, {country}"
+        else:
+            print(f"GeoIP API error for {ip_address}: Status code {response.status_code}")
+            if response.status_code == 429:
+                print(f"Rate limited by ipapi.co: {response.text}")
+                time.sleep(1)
+    except Exception as e:
+        print(f"GeoIP API error for {ip_address}: {e}")
+    
+    return "Unknown"
+
+def write_log_entry(log_data):
+    log_dir = os.path.join(os.path.dirname(__file__), 'logs')
+    os.makedirs(log_dir, exist_ok=True)
+    
+    with open(os.path.join(log_dir, 'visitor_log.txt'), 'a') as f:
+        f.write(log_data)
 
 def log_visitor_ip():
     ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
     if ip_address and ',' in ip_address:
         ip_address = ip_address.split(',')[0].strip()
     
+    if request.path.startswith('/static/'):
+        return
+    
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     path = request.path
     user_agent = request.headers.get('User-Agent', 'Unknown')
     referrer = request.headers.get('Referer', 'Direct')
     
-    log_dir = os.path.join(os.path.dirname(__file__), 'logs')
-    os.makedirs(log_dir, exist_ok=True)
+    def background_logging(ip, ts, pth, ua, ref):
+        geo_location = get_geo_location(ip)
+        log_data = f"{ts} | {ip} | {geo_location} | {pth} | {ua} | {ref}\n"
+        write_log_entry(log_data)
     
-    with open(os.path.join(log_dir, 'visitor_log.txt'), 'a') as f:
-        f.write(f"{timestamp} | {ip_address} | {path} | {user_agent} | {referrer}\n")
+    thread = threading.Thread(
+        target=background_logging,
+        args=(ip_address, timestamp, path, user_agent, referrer)
+    )
+    thread.daemon = True
+    thread.start()
 
 @app.context_processor
 def inject_now():
