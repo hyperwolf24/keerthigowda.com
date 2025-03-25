@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 from datetime import datetime, date
 import json
 import os
@@ -69,6 +69,9 @@ def inject_now():
 @app.before_request
 def before_request():
     log_visitor_ip()
+    blocked_paths = ['.git', '.env', '__pycache__']
+    if any(path in request.path for path in blocked_paths):
+        return "Not Found", 404
 
 @app.route('/')
 def home():
@@ -143,9 +146,26 @@ def traffic_advice():
         mimetype='application/json'
     )
 
+@app.after_request
+def add_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers['Content-Security-Policy'] = "default-src 'self'"
+    return response
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('500.html'), 500
+
 if __name__ == "__main__":    
     app.run(
         host='0.0.0.0',
         port=8080,
-        debug=True,
+        debug=False  # Change this for production
     )
