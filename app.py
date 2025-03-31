@@ -6,29 +6,27 @@ import requests
 import threading
 import time
 from functools import lru_cache
+import geoip2.database
+from geoip2.errors import AddressNotFoundError
 
 app = Flask(__name__)
 
-@lru_cache(maxsize=1024, typed=False)
 def get_geo_location(ip_address):
     try:
-        time.sleep(0.1)
-        
-        response = requests.get(f"https://ipapi.co/{ip_address}/json/", timeout=2)
-        if response.status_code == 200:
-            data = response.json()
-            city = data.get('city', 'Unknown')
-            country = data.get('country_name', 'Unknown')
-            return f"{city}, {country}"
-        else:
-            print(f"GeoIP API error for {ip_address}: Status code {response.status_code}")
-            if response.status_code == 429:
-                print(f"Rate limited by ipapi.co: {response.text}")
-                time.sleep(1)
+        reader = geoip2.database.Reader('/home/suraas/Desktop/keerthigowda.com/geodb/GeoLite2-City.mmdb')
+        response = reader.city(ip_address)
+        city = response.city.name or 'Unknown'
+        country = response.country.name or 'Unknown'
+        reader.close()
+        return f"{city}, {country}"
+    except (AddressNotFoundError, ValueError):
+        return "Unknown Location"
+    except FileNotFoundError:
+        print("GeoIP database file not found")
+        return "Location DB Error"
     except Exception as e:
-        print(f"GeoIP API error for {ip_address}: {e}")
-    
-    return "Unknown"
+        print(f"GeoIP error for {ip_address}: {e}")
+        return "Unknown"
 
 def write_log_entry(log_data):
     log_dir = os.path.join(os.path.dirname(__file__), 'logs')
@@ -38,12 +36,12 @@ def write_log_entry(log_data):
         f.write(log_data)
 
 def log_visitor_ip():
+    if request.path.startswith('/static/'):
+        return
+    
     ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
     if ip_address and ',' in ip_address:
         ip_address = ip_address.split(',')[0].strip()
-    
-    if request.path.startswith('/static/'):
-        return
     
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     path = request.path
