@@ -11,19 +11,31 @@ from geoip2.errors import AddressNotFoundError
 
 app = Flask(__name__)
 
+_geo_reader = None
+
+def get_geo_reader():
+    global _geo_reader
+    if _geo_reader is None:
+        db_path = os.path.join(os.path.dirname(__file__), 'geodb', 'GeoLite2-City.mmdb')
+        try:
+            _geo_reader = geoip2.database.Reader(db_path)
+        except FileNotFoundError:
+            print(f"GeoIP database file not found at {db_path}")
+            return None
+    return _geo_reader
+
 def get_geo_location(ip_address):
+    reader = get_geo_reader()
+    if not reader:
+        return "GeoIP DB Missing"
+    
     try:
-        reader = geoip2.database.Reader('/home/suraas/Desktop/keerthigowda.com/geodb/GeoLite2-City.mmdb')
         response = reader.city(ip_address)
         city = response.city.name or 'Unknown'
         country = response.country.name or 'Unknown'
-        reader.close()
         return f"{city}, {country}"
     except (AddressNotFoundError, ValueError):
         return "Unknown Location"
-    except FileNotFoundError:
-        print("GeoIP database file not found")
-        return "Location DB Error"
     except Exception as e:
         print(f"GeoIP error for {ip_address}: {e}")
         return "Unknown"
