@@ -9,4 +9,7 @@ services:
       - FLASK_ENV=production
     restart: always
     volumes:
-      - ./logs:/app/logs
+      - ./src/logs:/app/src/logs
+      - ./src/geodb:/app/src/geodb
+      - ./src/templates:/app/src/templates
+      - ./src/static:/app/src/static

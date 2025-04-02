@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Keerthi Gowda - Software Engineer{% endblock %}
+{% block description %}Welcome to the official website of Keerthi Gowda - Software Engineer, Farmer, and more. Explore music, farming and learn about Keerthi's work.{% endblock %}
+{% block keywords %}Keerthi Gowda, Software Engineer, Farmer, official website, music, farming{% endblock %}
+{% block canonical_path %}{% endblock %}
+
+{% block og_title %}Keerthi Gowda - Software Engineer{% endblock %}
+{% block og_description %}Welcome to the official website of Keerthi Gowda - Software Engineer, Farmer, and more.{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <img src="{{ url_for('static', filename='images/keerthi-gowda3.jpeg') }}" alt="Keerthi Gowda">
+    <div class="overlay">
+        <h1>Hi, I'm <span id="multilingual-name" class="multilingual-name">Keerthi Gowda</span></h1>
+        <p class="tagline">Full Stack Engineer | Farmer by Weekend</p>
+        <p class="personal-interests">
+        </p>
+    </div>
+</section>
+
+<script>
+    // Define the names in different languages
+    const names = [
+        { lang: 'kannada', text: 'ಕೀರ್ತಿ ಗೌಡ' },
+        { lang: 'english', text: 'Keerthi Gowda' },
+        { lang: 'malayalam', text: 'കീർത്തി ഗൗഡ' },
+        { lang: 'tamil', text: 'கீர்த்தி கவுடா' },
+        { lang: 'sanskrit', text: 'कीर्तिः गौडा' },
+        { lang: 'telugu', text: 'కీర్తి గౌడ' },
+        { lang: 'japanese', text: 'ケエルティ ゴウダ' }
+    ];
+    
+    // Get random start index from Malayalam, Japanese, or Kannada
+    const startLanguages = ['malayalam', 'japanese', 'kannada'];
+    const randomIndex = Math.floor(Math.random() * startLanguages.length);
+    let startLang = startLanguages[randomIndex];
+    let currentIndex = names.findIndex(name => name.lang === startLang);
+    if (currentIndex === -1) currentIndex = 0; // Fallback to English if not found
+    
+    // Set initial name
+    const nameElement = document.getElementById('multilingual-name');
+    nameElement.textContent = names[currentIndex].text;
+    nameElement.setAttribute('data-lang', names[currentIndex].lang);
+    
+    // Add click event to change language
+    nameElement.addEventListener('click', function() {
+        // Move to next language in the sequence
+        currentIndex = (currentIndex + 1) % names.length;
+        
+        // Update the displayed name with animation
+        nameElement.style.opacity = '0';
+        setTimeout(() => {
+            nameElement.textContent = names[currentIndex].text;
+            nameElement.setAttribute('data-lang', names[currentIndex].lang);
+            nameElement.style.opacity = '1';
+        }, 300);
+    });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Keerthi Gowda",
+  "url": "https://keerthigowda.com",
+  "sameAs": [
+    "https://www.instagram.com/keerthi.__.__",
+    "https://www.youtube.com/@hyperwolf24",
+    "https://x.com/hyperwolf_24"
+  ],
+  "jobTitle": "Software Engineer and Farmer",
+  "description": "Keerthi Gowda is a Software Engineer and Farmer based in Bengaluru, India."
+}
+</script>
+{% endblock %}
