@@ -1,0 +1,47 @@
+# Version control files
+.git
+.gitignore
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.env/
+.venv/
+ENV/
+
+# Development and local files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Log files
+src/logs/*
+*.log
+
+# GeoIP database files
+src/geodb/*
+!src/geodb/.gitkeep
+
+# Docker files
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Documentation
+README.md
+docs/
+
+# Test files
+tests/
+test/
+
+# Temporary files
+tmp/
+temp/ 
