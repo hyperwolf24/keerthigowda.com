@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from flask import Flask, render_template, request, make_response
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 import json
 import os
 import requests
@@ -22,8 +22,21 @@ import time
 from functools import lru_cache
 import geoip2.database
 from geoip2.errors import AddressNotFoundError
+from flask_compress import Compress
 
 app = Flask(__name__)
+Compress(app)  # Enable compression
+
+# Configure static file caching
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 31536000  # 1 year in seconds
+
+# Add cache control headers for static files
+@app.after_request
+def add_cache_headers(response):
+    if request.path.startswith('/static/'):
+        response.headers['Cache-Control'] = 'public, max-age=31536000'
+        response.headers['Expires'] = (datetime.now() + timedelta(days=365)).strftime('%a, %d %b %Y %H:%M:%S GMT')
+    return response
 
 _geo_reader = None
 
