@@ -7,7 +7,7 @@ html {
     font-family: 'IBM Plex Mono', monospace;
     color: white;
     overflow-x: hidden;
-    background-color: #0a192f;
+    background-color: transparent;
     position: relative;
 }
 
@@ -15,7 +15,7 @@ html {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background-color: #0a192f;
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,16 +24,35 @@ html {
 }
 
 .background-animation {
+    display: none;
+}
+
+.farm-background {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, #0a192f, #112240, #1d3461);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    z-index: 1;
+    background-image: url('/static/images/farm.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
     pointer-events: none;
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    transform: scale(1.1);
+}
+
+.farm-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay with 50% opacity */
+    z-index: 1;
 }
 
 @keyframes gradient {
@@ -62,12 +81,12 @@ html {
 
 .bubble {
     position: absolute;
-    background-color: rgba(103, 138, 110, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 @keyframes float {
-
     0%,
     100% {
         transform: translate(0, 0);
@@ -114,7 +133,7 @@ html {
 .tagline {
     font-size: 1.2em;
     margin-top: 0.5rem;
-    color: #02a57f;
+    color: #018c6d;
     animation: fadeInUp 1s ease-out 0.2s both;
     letter-spacing: 0.02em;
     font-weight: 500;
@@ -128,7 +147,7 @@ html {
 .skills span {
     display: inline-block;
     background-color: rgba(100, 255, 218, 0.1);
-    color: #02a57f;
+    color: #018c6d;
     padding: 0.3rem 0.6rem;
     margin: 0.3rem;
     border-radius: 20px;
@@ -160,7 +179,7 @@ html {
 
 .learning-section h3 {
     font-size: 1.3em;
-    color: #02a57f;
+    color: #018c6d;
     margin-bottom: 0.6rem;
 }
 
@@ -172,7 +191,7 @@ html {
 
 .learning-items span {
     background-color: rgba(100, 255, 218, 0.1);
-    color: #02a57f;
+    color: #018c6d;
     padding: 0.5rem 0.8rem;
     margin: 0.3rem;
     border-radius: 20px;
@@ -183,9 +202,9 @@ html {
 .note-section {
     margin-top: 2rem;
     padding: 1rem;
-    background: rgba(2, 165, 127, 0.1);
+    background: rgba(1, 140, 109, 0.1);
     border-radius: 8px;
-    border-left: 4px solid #02a57f;
+    border-left: 4px solid #018c6d;
 }
 
 .note-section p {
@@ -236,7 +255,7 @@ html {
 }
 
 .farm-section h2 {
-    color: #02a57f;
+    color: #018c6d;
     text-align: center;
     margin-bottom: 1rem;
     font-size: 2em;
@@ -335,7 +354,7 @@ html {
 .nav-logo {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #02a57f;
+    color: #018c6d;
     font-family: 'IBM Plex Mono', monospace;
     letter-spacing: -0.03em;
     text-decoration: none;
@@ -357,8 +376,8 @@ html {
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #02a57f;
-    background-color: rgba(2, 165, 127, 0.1);
+    color: #018c6d;
+    background-color: rgba(1, 140, 109, 0.1);
 }
 
 .nav-toggle {
@@ -372,7 +391,7 @@ html {
     display: block;
     width: 25px;
     height: 2px;
-    background-color: #02a57f;
+    background-color: #018c6d;
     transition: 0.3s;
 }
 
@@ -402,17 +421,17 @@ html {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #02a57f;
+    color: #018c6d;
     text-decoration: none;
     padding: 0.8rem 1.5rem;
-    border: 1px solid #02a57f;
+    border: 1px solid #018c6d;
     border-radius: 4px;
     transition: all 0.3s ease;
     font-family: 'IBM Plex Mono', monospace;
 }
 
 .contact-link:hover {
-    background-color: rgba(2, 165, 127, 0.1);
+    background-color: rgba(1, 140, 109, 0.1);
     transform: translateY(-2px);
 }
 
@@ -478,7 +497,7 @@ html {
 }
 
 .about-text h3 {
-    color: #02a57f;
+    color: #018c6d;
     margin-bottom: 1rem;
     font-size: 1.3em;
 }
@@ -501,7 +520,7 @@ html {
     content: "▹";
     position: absolute;
     left: 0;
-    color: #02a57f;
+    color: #018c6d;
 }
 
 .about-image {
@@ -511,7 +530,7 @@ html {
 .about-image img {
     width: 100%;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(2, 165, 127, 0.2);
+    box-shadow: 0 4px 20px rgba(1, 140, 109, 0.2);
     transition: transform 0.3s ease;
 }
 
@@ -540,13 +559,13 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(2, 165, 127, 0.3);
+    background: rgba(1, 140, 109, 0.3);
     border-radius: 5px;
     transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(2, 165, 127, 0.5);
+    background: rgba(1, 140, 109, 0.5);
 }
 
 /* Move background elements to body */
@@ -598,7 +617,7 @@ html {
 
 .about-hero h2 {
     font-size: 3.5em;
-    color: #02a57f;
+    color: #018c6d;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -630,21 +649,21 @@ html {
 .content-card {
     position: relative;
     z-index: 5;
-    background: rgba(2, 165, 127, 0.1);
+    background: rgba(1, 140, 109, 0.1);
     border-radius: 15px;
     padding: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(2, 165, 127, 0.2);
+    border: 1px solid rgba(1, 140, 109, 0.2);
     backdrop-filter: blur(10px);
 }
 
 .content-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(2, 165, 127, 0.2);
+    box-shadow: 0 10px 20px rgba(1, 140, 109, 0.2);
 }
 
 .content-card h3 {
-    color: #02a57f;
+    color: #018c6d;
     font-size: 1.5em;
     margin-bottom: 1.5rem;
     position: relative;
@@ -657,7 +676,7 @@ html {
     left: 0;
     width: 50px;
     height: 3px;
-    background: #02a57f;
+    background: #018c6d;
     border-radius: 2px;
 }
 
@@ -685,14 +704,14 @@ html {
 }
 
 .fun-fact {
-    background: rgba(2, 165, 127, 0.15);
+    background: rgba(1, 140, 109, 0.15);
     text-align: center;
     grid-column: 1 / -1;
 }
 
 .fun-fact p {
     font-size: 1.2em;
-    color: #02a57f;
+    color: #018c6d;
 }
 
 @media (max-width: 768px) {
@@ -755,7 +774,7 @@ html {
 }
 
 .about-card h3 {
-    color: #64ffda;
+    color: #018c6d;
     margin-top: 0;
     margin-bottom: 1rem;
 }
@@ -776,13 +795,13 @@ html {
 
 .music-image {
     max-height: 400px; 
-    box-shadow: 0 0 25px rgba(2, 165, 127, 0.3); 
-    border: 2px solid rgba(2, 165, 127, 0.2);
+    box-shadow: 0 0 25px rgba(1, 140, 109, 0.3); 
+    border: 2px solid rgba(1, 140, 109, 0.2);
     display: block;
 }
 
 .music-title {
-    color: #02a57f; 
+    color: #018c6d; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
     position: relative; 
     z-index: 10;
@@ -793,27 +812,28 @@ html {
 .music-card {
     padding: 2rem; 
     border-radius: 12px;
-    background: rgba(17, 34, 64, 0.6);  
+    background: rgba(17, 34, 64, 0.8);  
     backdrop-filter: blur(5px); 
     position: relative; 
     z-index: 10; 
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    border: 1px solid rgba(2, 165, 127, 0.2);
-    height: 100%;
-    margin-bottom: 20px;
+    border: 1px solid rgba(1, 140, 109, 0.2);
+    text-align: center;
 }
 
-.row {
-    margin-bottom: 20px;
+.music-icon {
+    width: 80px;
+    height: auto;
+    margin-bottom: 1rem;
 }
 
 .music-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(2, 165, 127, 0.2);
+    box-shadow: 0 10px 20px rgba(1, 140, 109, 0.2);
 }
 
 .music-card h3 {
-    color: #02a57f; 
+    color: #018c6d; 
     margin-bottom: 1rem;
 }
 
@@ -878,12 +898,12 @@ html {
     cursor: pointer;
     transition: opacity 0.3s ease, color 0.3s ease;
     display: inline-block;
-    color: #02a57f;
+    color: #018c6d;
     position: relative;
 }
 
 .multilingual-name:hover {
-    color: #64ffda;
+    color: #018c6d;
 }
 
 .multilingual-name::after {
@@ -893,11 +913,33 @@ html {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #02a57f;
+    background-color: #018c6d;
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
 
 .multilingual-name:hover::after {
     transform: scaleX(1);
+}
+
+.work-experience {
+    margin: 20px 0; /* Adjust margin as needed */
+    padding: 10px; /* Add padding for better spacing */
+}
+
+.timeline {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+.timeline li {
+    margin-bottom: 10px; /* Space between timeline items */
+}
+
+.timeline h4 {
+    font-weight: bold; /* Make job titles stand out */
+}
+
+.timeline p {
+    color: #666; /* Lighter color for dates */
 }
