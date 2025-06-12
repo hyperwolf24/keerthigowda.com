@@ -23,6 +23,7 @@ from functools import lru_cache
 import geoip2.database
 from geoip2.errors import AddressNotFoundError
 from flask_compress import Compress
+from typing import Dict, List
 
 app = Flask(__name__)
 Compress(app)  # Enable compression
@@ -105,6 +106,7 @@ def inject_now():
 
 @app.before_request
 def before_request():
+    """Log visitor IP before each request."""
     log_visitor_ip()
     blocked_paths = ['.git', '.env', '__pycache__']
     if any(path in request.path for path in blocked_paths):
@@ -189,15 +191,24 @@ def add_security_headers(response):
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
+        "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; "
+        "script-src 'self' 'unsafe-inline'; "
+        "img-src 'self' data:; "
+        "connect-src 'self'"
+    )
     return response
 
 @app.errorhandler(404)
 def not_found_error(error):
+    """Render custom 404 error page."""
     return render_template('404.html'), 404
 
 @app.errorhandler(500)
 def internal_error(error):
+    """Render custom 500 error page."""
     return render_template('500.html'), 500
 
 if __name__ == "__main__":    

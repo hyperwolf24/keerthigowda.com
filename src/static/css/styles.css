@@ -943,3 +943,85 @@ html {
 .timeline p {
     color: #666; /* Lighter color for dates */
 }
+
+/* Error Pages */
+.error-title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #018c6d;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.error-subtitle {
+    font-size: 2rem;
+    color: #ccd6f6;
+    margin-bottom: 1.5rem;
+}
+
+.error-message {
+    font-size: 1.2rem;
+    color: #8892b0;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #018c6d;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #016b54;
+}
+
+.btn-secondary {
+    background-color: rgba(100, 255, 218, 0.1);
+    color: #018c6d;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(100, 255, 218, 0.2);
+}
+
+@media (max-width: 768px) {
+    .error-title {
+        font-size: 3rem;
+    }
+    
+    .error-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .error-message {
+        font-size: 1rem;
+    }
+    
+    .error-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

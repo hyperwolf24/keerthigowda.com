@@ -25,7 +25,7 @@ limitations under the License.
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="{{ url_for('static', filename='css/styles.css') }}" as="style">
-    <link rel="preload" href="{{ url_for('static', filename='icons/favicon-96x96.png') }}" as="image">
+    <link rel="preload" href="{{ url_for('static', filename='icons/favicon-96x96.png') }}" as="image" type="image/png">
     
     <!-- Meta Tags -->
     <meta name="description" content="{% block description %}Official website of Keerthi Gowda - Software Engineer, farmer, and more.{% endblock %}">
@@ -47,13 +47,15 @@ limitations under the License.
     
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ request.url_root }}{% block canonical_path %}{% endblock %}">
-    <link rel="icon" type="image/x-icon" href="/static/icons/favicon-96x96.png">
-    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/static/icons/apple-icon-precomposed.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icons/favicon-96x96.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="{{ url_for('static', filename='icons/apple-icon-precomposed.png') }}">
     
     <!-- Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <meta name="google-site-verification" content="MPqjuuwDV6FcA6-ESZFgeZNTVnMOrin1IM6YyJpZW1w" />
 </head>
